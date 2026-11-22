@@ -8,7 +8,26 @@ async function check(s){if(!sb||!s){SA(false);return}let{data}=await sb.from('ad
 useEffect(()=>{load();if(!sb)return;sb.auth.getSession().then(({data})=>{SS(data.session);check(data.session)});let{data:{subscription}}=sb.auth.onAuthStateChange((_,s)=>{SS(s);check(s)});return()=>subscription.unsubscribe()},[]);
 let shown=useMemo(()=>items.filter(p=>p.is_available&&(cat==='Semua'||p.category===cat)),[items,cat]),count=Object.values(cart).reduce((a,b)=>a+b,0),total=items.reduce((a,p)=>a+(cart[p.id]||0)*p.price,0);
 function qty(id,d){Q(old=>{let n={...old,[id]:Math.max(0,(old[id]||0)+d)};if(!n[id])delete n[id];return n})}
-function checkout(){let lines=items.filter(p=>cart[p.id]).map(p=>`${p.name} x${cart[p.id]} = ${money(p.price*cart[p.id])}`);if(lines.length)window.open(`https://wa.me/${wa}?text=${encodeURIComponent('Halo CHEESE N’ CHA, saya ingin memesan:\\n'+lines.join('\\n')+'\\n\\nTotal: '+money(total))}`,'_blank','noopener')}
+
+function checkout(){
+  let lines=items
+    .filter(p=>cart[p.id])
+    .map(p=>`${p.name} x${cart[p.id]} = ${money(p.price*cart[p.id])}`);
+
+  if(lines.length){
+    let message =
+      'Halo CHEESE N’ CHA, saya ingin memesan:\n' +
+      lines.join('\n') +
+      '\n\nTotal: ' + money(total);
+
+    window.open(
+      `https://wa.me/${wa}?text=${encodeURIComponent(message)}`,
+      '_blank',
+      'noopener'
+    );
+  }
+}
+
 async function login(e){e.preventDefault();B(true);let{error}=await sb.auth.signInWithPassword({email,password:pass});M(error?.message||'Login dikirim.');B(false)}
 function fresh(){ED(null);PH(null);F({name:'',category:'Minuman',price:'25000',description:'',image_url:'',is_available:true})}
 function editItem(p){ED(p.id);PH(null);F({name:p.name,category:p.category,price:String(p.price),description:p.description||'',image_url:p.image_url||'',is_available:p.is_available})}
