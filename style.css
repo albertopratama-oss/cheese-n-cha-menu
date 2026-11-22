@@ -101,3 +101,27 @@ footer button:disabled {
   background: #25D366;
   opacity: 0.55;
 }
+/* Perbaikan footer tampilan HP */
+@media(max-width:520px) {
+  footer {
+    bottom: 48px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding: 12px;
+    gap: 10px;
+  }
+
+  footer span {
+    font-size: 12px;
+  }
+
+  footer button {
+    padding: 12px 14px;
+    font-size: 12px;
+    white-space: nowrap;
+  }
+
+  .app {
+    padding-bottom: 145px;
+  }
+}
