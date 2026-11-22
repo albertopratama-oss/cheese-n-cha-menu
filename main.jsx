@@ -9,24 +9,40 @@ useEffect(()=>{load();if(!sb)return;sb.auth.getSession().then(({data})=>{SS(data
 let shown=useMemo(()=>items.filter(p=>p.is_available&&(cat==='Semua'||p.category===cat)),[items,cat]),count=Object.values(cart).reduce((a,b)=>a+b,0),total=items.reduce((a,p)=>a+(cart[p.id]||0)*p.price,0);
 function qty(id,d){Q(old=>{let n={...old,[id]:Math.max(0,(old[id]||0)+d)};if(!n[id])delete n[id];return n})}
 
-function checkout(){
-  let lines=items
-    .filter(p=>cart[p.id])
-    .map(p=>`${p.name} x${cart[p.id]} = ${money(p.price*cart[p.id])}`);
 
-  if(lines.length){
-    let message =
-      'Halo CHEESE N’ CHA, saya ingin memesan:\n' +
-      lines.join('\n') +
-      '\n\nTotal: ' + money(total);
+function checkout() {
+  let lines = items
+    .filter(p => cart[p.id])
+    .map(p => `${p.name} x${cart[p.id]} = ${money(p.price * cart[p.id])}`);
 
-    window.open(
-      `https://wa.me/${wa}?text=${encodeURIComponent(message)}`,
-      '_blank',
-      'noopener'
-    );
+  if (!lines.length) return;
+
+  let nama = prompt('Masukkan nama penerima pesanan:');
+  if (!nama || !nama.trim()) {
+    alert('Nama penerima wajib diisi.');
+    return;
   }
+
+  let alamat = prompt('Masukkan alamat lengkap pengantaran:');
+  if (!alamat || !alamat.trim()) {
+    alert('Alamat pengantaran wajib diisi.');
+    return;
+  }
+
+  let message =
+    'Halo CHEESE N’ CHA, saya ingin memesan:\n' +
+    lines.join('\n') +
+    '\n\nNama penerima: ' + nama.trim() +
+    '\nAlamat pengantaran: ' + alamat.trim() +
+    '\n\nTotal: ' + money(total);
+
+  window.open(
+    `https://wa.me/${wa}?text=${encodeURIComponent(message)}`,
+    '_blank',
+    'noopener'
+  );
 }
+
 
 async function login(e){e.preventDefault();B(true);let{error}=await sb.auth.signInWithPassword({email,password:pass});M(error?.message||'Login dikirim.');B(false)}
 function fresh(){ED(null);PH(null);F({name:'',category:'Minuman',price:'25000',description:'',image_url:'',is_available:true})}
