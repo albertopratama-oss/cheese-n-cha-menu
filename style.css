@@ -125,3 +125,15 @@ footer button:disabled {
     padding-bottom: 145px;
   }
 }
+/* Posisi badge Netlify di HP */
+@media (max-width: 520px) {
+  [data-netlify-badge],
+  .netlify-badge,
+  a[href*="netlify.com"] {
+    left: 8px !important;
+    right: auto !important;
+    bottom: 8px !important;
+    transform: scale(0.65);
+    transform-origin: bottom left;
+  }
+}
