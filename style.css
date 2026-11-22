@@ -179,3 +179,8 @@ iframe#nl-badge-frame {
     transform-origin: bottom left !important;
   }
 }
+
+/* Sembunyikan badge Powered by Netlify */
+iframe#nl-badge-frame {
+  display: none !important;
+}
