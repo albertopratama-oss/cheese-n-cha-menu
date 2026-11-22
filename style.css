@@ -157,3 +157,25 @@ footer button:disabled {
     transform-origin: bottom left !important;
   }
 }
+
+/* Posisi dan ukuran badge Netlify */
+iframe#nl-badge-frame {
+  position: fixed !important;
+  left: 8px !important;
+  right: auto !important;
+  bottom: 8px !important;
+  transform: scale(0.65) !important;
+  transform-origin: bottom left !important;
+  z-index: 10 !important;
+}
+
+/* Tampilan HP */
+@media (max-width: 600px) {
+  iframe#nl-badge-frame {
+    left: 6px !important;
+    right: auto !important;
+    bottom: 85px !important;
+    transform: scale(0.55) !important;
+    transform-origin: bottom left !important;
+  }
+}
