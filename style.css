@@ -137,3 +137,23 @@ footer button:disabled {
     transform-origin: bottom left;
   }
 }
+
+/* Atur posisi badge Netlify */
+#nl-badge {
+  left: 10px !important;
+  right: auto !important;
+  bottom: 12px !important;
+  transform: scale(0.65) !important;
+  transform-origin: bottom left !important;
+}
+
+/* Khusus tampilan HP */
+@media (max-width: 600px) {
+  #nl-badge {
+    left: 8px !important;
+    right: auto !important;
+    bottom: 85px !important;
+    transform: scale(0.55) !important;
+    transform-origin: bottom left !important;
+  }
+}
